@@ -1,7 +1,10 @@
 
-github original do projeto
-https://github.com/acenelio/ms-course
+# github original do projeto
+  https://github.com/acenelio/ms-course
 
-data.sql
-este arquivo será utilizado para inclusão de registros no banco de dados
-quando a aplicação é executada
+# data.sql
+  este arquivo será utilizado para inclusão de registros no banco de dados
+  quando a aplicação é executada
+  
+# para acessar o banco h2
+  http://localhost:8001/h2-console/l  
