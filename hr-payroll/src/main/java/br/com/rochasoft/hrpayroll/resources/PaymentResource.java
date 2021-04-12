@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
 import br.com.rochasoft.hrpayroll.entities.Payment;
 import br.com.rochasoft.hrpayroll.services.PaymentService;
 
@@ -19,6 +21,7 @@ public class PaymentResource
 	private PaymentService service;
 	
 	
+	@HystrixCommand(fallbackMethod = "getPaymentAlternative") // habilita o método alternativo
 	@GetMapping(value = "/{workerId}/days/{days}")
 	public ResponseEntity<Payment> getPayment(@PathVariable Long    workerId,
 			                                  @PathVariable Integer days )
@@ -29,5 +32,14 @@ public class PaymentResource
 			
 	}
 	
-
+	public ResponseEntity<Payment> getPaymentAlternative(Long    workerId,
+			                                             Integer days )
+	{
+		
+		// implementação alternativa, caso o método getPayment gere problemas (fora do ar)		
+		Payment payment = new Payment("Executou pagamento Alternativo", 400.0, days);
+		return ResponseEntity.ok(payment);
+			
+	}
+	
 }

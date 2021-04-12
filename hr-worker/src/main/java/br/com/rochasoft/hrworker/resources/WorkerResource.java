@@ -43,11 +43,37 @@ public class WorkerResource
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Worker> findById(@PathVariable Long id)
 	{
+			
+		logger.info("inicio método findById");
 		
 		// imprime a porta que está rodando
-		logger.info("porta = " + env.getProperty("local.server.port"));		
+		logger.info("porta = " + env.getProperty("local.server.port"));
+		
+		// simulação de timeout
+		// se o método não responder em 1 segundo, já deve executar o método alternativo
+		// habilitando as configurações no application.properts, vai permitir executar com um tempo maior, sem gerar erro
+		/*
+		try 
+		{
+			Thread.sleep(3000L);
+		} 
+		catch (InterruptedException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		// simulação de erro ocorrido
+		// quando ocorre um erro no método já executa o método alternativo
+		/*
+		int x = 1;
+		if (x == 1)	throw new RuntimeException("Erro teste hystrix");
+		*/
 		
 		Worker obj = repository.findById(id).get();
+		
+		logger.info("final método findById");
 		
 		return ResponseEntity.ok(obj);				
 		
