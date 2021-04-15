@@ -8,7 +8,14 @@
   
 # para acessar o banco h2
   http://localhost:8001/h2-console/l
-  
+
+# ordem de execução dos projetos
+  1 - hr-config-server
+  2 - hr-eureka-server
+  3 - hr-api-gateway-zull
+  4 - hr-worker
+  5 - hr-payroll
+    
   
 # Detalhes do Curso disponíveis também no readme do github  
 Curso Microsserviços Java com Spring Boot e Spring Cloud 
@@ -126,9 +133,11 @@ ele busca as configurações no repositório central de configurações.
 hr-worker.properties
 
 test.config=My config value default profile
+
 hr-worker-test.properties
 
 test.config=My config value test profile
+
 Teste:
 
 http://localhost:8888/hr-worker/default
