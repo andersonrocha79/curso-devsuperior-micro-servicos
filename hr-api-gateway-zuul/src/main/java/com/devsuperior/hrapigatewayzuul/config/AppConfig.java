@@ -1,14 +1,19 @@
 package com.devsuperior.hrapigatewayzuul.config;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+@RefreshScope // mantém os valores do arquivo de configuração do 'git' atualizados através do 'actuator'
 @Configuration
 public class AppConfig 
 {
 	
+	@Value("${jwt.secret}")
+	private String jwtSecret;
 	
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter()
@@ -16,7 +21,7 @@ public class AppConfig
 		
 		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
 		
-		tokenConverter.setSigningKey("MY-SECRET-KEY"); // temporário
+		tokenConverter.setSigningKey(jwtSecret); // faz a leitura direto do arquivo de configuração do repositório git
 		
 		return tokenConverter;
 		

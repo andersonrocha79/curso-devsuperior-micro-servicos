@@ -16,6 +16,7 @@
   4 - hr-worker
   5 - hr-payroll
     
+# se o projeto for cliente do servidor de configuração, precisa ter o arquivo bootstrap.properties
   
 # Detalhes do Curso disponíveis também no readme do github  
 Curso Microsserviços Java com Spring Boot e Spring Cloud 
